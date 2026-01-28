@@ -8,7 +8,7 @@
 <meta property="og:title" content="The DaVinci Frequency">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;900&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Poppins:wght@400;700;900&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -29,26 +29,25 @@ html, body {
 
 /* === HEADLINE === */
 .headline {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 900;
-  line-height: 1.25;
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
+  line-height: 120%;
+  letter-spacing: 0.02rem;
   text-align: center;
+  text-transform: capitalize;
   padding: 20px 0 10px;
+  font-size: 1.87rem;
+  color: #000;
 }
 .headline .red {
   color: rgb(255, 0, 0);
-  display: block;
-  font-size: 2.5rem;
-}
-.headline .black {
-  color: #000;
-  display: block;
-  font-size: 2.5rem;
+  font-weight: 700;
 }
 @media (max-width: 770px) {
-  .headline .red,
-  .headline .black {
-    font-size: 1.6rem;
+  .headline {
+    font-size: 1.5rem;
+    letter-spacing: 0;
+    line-height: 140%;
   }
 }
 
@@ -247,8 +246,7 @@ html, body {
 
   <!-- Headline -->
   <h1 class="headline">
-    <span class="red">The Greatest Enemy Of Tinnitus?</span>
-    <span class="black">This 5-Minute Evening Routine Stops The Ear Ringing</span>
+    <b class="red">The Greatest Enemy Of Tinnitus?<br></b>This 5-Minute Evening Routine Stops The Ear Ringing
   </h1>
 
   <!-- Live Badge -->
