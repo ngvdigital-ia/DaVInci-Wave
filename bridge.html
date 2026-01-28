@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The DaVinci Frequency</title>
+<meta property="og:type" content="website">
+<meta property="og:title" content="The DaVinci Frequency">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;900&family=Inter:wght@300;400;500;700&family=Oswald:wght@700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  min-height: 100%;
+  background: #fff;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  color: #000;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page {
+  max-width: 771px;
+  margin: 0 auto;
+  padding: 20px 15px;
+  text-align: center;
+}
+
+/* === HEADLINE === */
+.headline {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2.08rem;
+  font-weight: 900;
+  line-height: 1.3;
+  text-align: center;
+  padding: 15px 0 5px;
+  color: #000;
+}
+.headline .red {
+  color: rgb(255, 0, 0);
+}
+@media (max-width: 770px) {
+  .headline { font-size: 1.5rem; }
+  .headline-desktop { display: none; }
+}
+@media (min-width: 771px) {
+  .headline-mobile { display: none; }
+}
+
+/* === LIVE BADGE (purple) === */
+.live-badge-wrap {
+  text-align: center;
+  padding: 15px 0;
+}
+.live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-size: 13px;
+  font-weight: 500;
+  box-shadow: 0 3px 15px rgba(139,92,246,0.3), 0 0 25px rgba(139,92,246,0.15);
+  position: relative;
+  overflow: hidden;
+}
+.live-badge .shimmer {
+  position: absolute;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+  transform: rotate(45deg);
+  animation: shimmer 3s infinite;
+}
+@keyframes shimmer {
+  0% { transform: translateX(-100%) rotate(45deg); }
+  100% { transform: translateX(100%) rotate(45deg); }
+}
+.live-dot {
+  width: 8px; height: 8px;
+  background: #10b981;
+  border-radius: 50%;
+  position: relative;
+  z-index: 1;
+}
+.live-dot::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  width: 100%; height: 100%;
+  background: #10b981;
+  border-radius: 50%;
+  animation: pulse-ring 2s infinite;
+  opacity: 0.6;
+}
+@keyframes pulse-ring {
+  0% { transform: translate(-50%,-50%) scale(1); opacity: 0.6; }
+  100% { transform: translate(-50%,-50%) scale(2); opacity: 0; }
+}
+.live-badge span { position: relative; z-index: 1; }
+.live-badge .count { font-weight: 600; font-size: 14px; }
+.live-badge .source { font-weight: 600; color: #fbbf24; }
+
+/* === VIDEO === */
+.video-container {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  border: 1px solid #000;
+}
+.video-container div {
+  width: 100%;
+}
+
+/* === PURCHASING COUNTER (yellow box) === */
+.purchase-counter-wrap {
+  text-align: center;
+  padding: 3px 0;
+}
+.purchase-counter {
+  display: inline-block;
+  padding: 2px 8px;
+  background-color: #fffeec;
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  color: #000;
+  line-height: 1.2;
+}
+.purchase-counter .count { font-weight: 700; font-variant-numeric: tabular-nums; }
+@keyframes shake-box {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(-3px) rotate(-1deg); }
+  40% { transform: translateX(3px) rotate(1deg); }
+  60% { transform: translateX(-3px) rotate(-1deg); }
+  80% { transform: translateX(3px) rotate(1deg); }
+  100% { transform: translateX(0); }
+}
+.shaking { animation: shake-box 0.4s ease-in-out; }
+@media (max-width: 480px) {
+  .purchase-counter { font-size: 14px; padding: 2px; }
+}
+
+/* === CTA BUTTON === */
+.cta-btn-wrap {
+  padding: 15px 0 5px;
+}
+.cta-btn {
+  display: inline-block;
+  background: rgb(255, 238, 43);
+  color: rgb(13, 15, 97);
+  font-family: 'Oswald', sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+  padding: 30px 40px;
+  border: 3px solid rgb(255, 183, 30);
+  border-radius: 9px;
+  cursor: pointer;
+  text-decoration: none;
+  text-transform: uppercase;
+  line-height: 1.2;
+  transition: background 0.3s;
+  animation: pulseGlow 2s infinite;
+  position: relative;
+  overflow: hidden;
+}
+.cta-btn:hover {
+  background: rgb(209, 192, 0);
+}
+@keyframes pulseGlow {
+  0% { box-shadow: 0 0 0 0 rgba(255,238,43,0.7); }
+  50% { box-shadow: 0 0 20px 10px rgba(255,238,43,0.3); }
+  100% { box-shadow: 0 0 0 0 rgba(255,238,43,0.7); }
+}
+.cta-btn .shine {
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  animation: shine 3s infinite;
+}
+@keyframes shine {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+@media (max-width: 770px) {
+  .cta-btn { font-size: 36px; padding: 20px 25px; }
+}
+
+/* === SUBTEXT LINK === */
+.sub-link {
+  padding: 10px 0;
+  text-align: center;
+}
+.sub-link a {
+  color: rgb(13, 15, 97);
+  font-size: 1rem;
+  text-decoration: underline;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+/* === DR NOTE === */
+.dr-note {
+  padding: 20px 10px;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #000;
+  text-align: center;
+}
+.dr-note b { font-weight: 700; }
+
+/* === PRODUCT IMAGE === */
+.product-image {
+  text-align: center;
+  padding: 10px 0;
+}
+.product-image img {
+  max-width: 100%;
+  width: 876px;
+}
+
+/* === TRUST BADGE === */
+.trust-badge {
+  text-align: center;
+  padding: 15px 0;
+}
+.trust-badge img {
+  max-width: 545px;
+  width: 23%;
+}
+@media (max-width: 770px) {
+  .trust-badge img { width: 50%; }
+}
+
+/* === FOOTER === */
+.page-footer {
+  padding: 20px;
+  text-align: center;
+  font-size: 12px;
+  color: rgba(0,0,0,0.7);
+  line-height: 1.45;
+}
+.page-footer a {
+  color: #1a73e8;
+  text-decoration: none;
+}
+.page-footer a:hover { text-decoration: underline; }
+
+/* === EXIT POPUP === */
+.popup-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.6);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 20px;
+}
+.popup-overlay.active { display: flex; }
+.popup {
+  background: #fff;
+  border-radius: 12px;
+  max-width: 600px;
+  width: 100%;
+  padding: 30px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  animation: popupIn 0.4s ease-out;
+}
+@keyframes popupIn {
+  from { opacity: 0; transform: scale(0.9) translateY(20px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+.popup-close {
+  position: absolute;
+  top: 10px; right: 14px;
+  background: none;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  color: #999;
+}
+.popup-close:hover { color: #333; }
+.popup-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: #000;
+  margin-bottom: 5px;
+  line-height: 1.3;
+}
+.popup-title .red { color: rgb(255,0,0); }
+.popup-subtitle {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #000;
+  margin-bottom: 15px;
+}
+.popup-content {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  text-align: left;
+}
+.popup-img {
+  flex-shrink: 0;
+  width: 200px;
+  border-radius: 8px;
+}
+.popup-text {
+  font-size: 0.95rem;
+  color: #333;
+  line-height: 1.6;
+}
+.popup-text b { color: #000; }
+.popup-btn-wrap {
+  padding-top: 20px;
+}
+.popup-btn {
+  display: inline-block;
+  background: rgb(255,238,43);
+  color: rgb(13,15,97);
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  padding: 16px 40px;
+  border: 2px solid rgb(255,183,30);
+  border-radius: 9px;
+  cursor: pointer;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+.popup-btn:hover { background: rgb(209,192,0); }
+@media (max-width: 600px) {
+  .popup-content { flex-direction: column; align-items: center; text-align: center; }
+  .popup-img { width: 160px; }
+  .popup-title { font-size: 1.3rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- Desktop Headline -->
+  <div class="headline headline-desktop">
+    <span class="red">The Greatest Enemy of Tinnitus?<br></span>
+    This 5-Minute Evening Routine Stops the Ear Ringing
+  </div>
+
+  <!-- Mobile Headline -->
+  <div class="headline headline-mobile">
+    <span class="red">The Greatest Enemy of Tinnitus? </span>
+    This 5-Minute Evening Routine Stops the Ear Ringing
+  </div>
+
+  <!-- Live Badge -->
+  <div class="live-badge-wrap">
+    <div class="live-badge">
+      <div class="shimmer"></div>
+      <div class="live-dot"></div>
+      <span class="count" id="viewerCount">742</span>
+      <span>people from</span>
+      <span class="source">Facebook</span>
+      <span>are watching</span>
+    </div>
+  </div>
+
+  <!-- Video (Converteai / Vturb Player) -->
+  <div class="video-container">
+    <div id="vid-placeholder" style="width:100%;aspect-ratio:16/9;background:#000;display:flex;align-items:center;justify-content:center;cursor:pointer;" onclick="window.location.href='sales.html'">
+      <svg width="68" height="68" viewBox="0 0 68 68" fill="none"><circle cx="34" cy="34" r="34" fill="rgba(255,255,255,0.15)"/><polygon points="27,20 27,48 50,34" fill="#fff"/></svg>
+    </div>
+  </div>
+
+  <!-- Purchase Counter -->
+  <div class="purchase-counter-wrap">
+    <div class="purchase-counter shaking" id="purchaseBox">
+      <span class="count" id="purchaseCount">14</span> Others Are Purchasing The DaVinci Frequency Right Now
+    </div>
+  </div>
+
+  <!-- CTA Button (Desktop) -->
+  <div class="cta-btn-wrap">
+    <a href="sales.html" class="cta-btn">
+      <span class="shine"></span>
+      ORDER NOW
+    </a>
+  </div>
+
+  <!-- Sub Link -->
+  <div class="sub-link">
+    <a href="sales.html">YES! I Want To Stop My Ringing Ears Forever. (Add This To My Cart)<br>I Deserve To Enjoy My Golden Years In Silence.</a>
+  </div>
+
+  <!-- Dr. Note -->
+  <div class="dr-note">
+    <b>A Personal Note From Dr. Grant:<br></b>
+    <i>"If you are over 60 and have silently resigned yourself to the ringing, I beg you: <u>never give up on yourself.</u> Please, just give this an honest try for a few days; words cannot describe this, you simply have to experience it."</i>
+  </div>
+
+  <!-- Product Image -->
+  <div class="product-image">
+    <img src="https://images.clickfunnels.com/cdn-cgi/image/width=1000px,fit=scale-down,f=auto,q=70/https://statics.myclickfunnels.com/workspace/JZYVrZ/image/19418469/file/0daec2d6d25deec77370fa9e33a899a3.png" alt="DaVinci Frequency">
+  </div>
+
+  <!-- Second CTA -->
+  <div class="cta-btn-wrap">
+    <a href="sales.html" class="cta-btn">
+      <span class="shine"></span>
+      YES! I WANT SILENCE
+    </a>
+  </div>
+  <div class="sub-link">
+    <a href="sales.html"><b><u>ADD TO CART</u></b></a>
+  </div>
+
+  <!-- Trust Badge -->
+  <div class="trust-badge">
+    <img src="https://images.clickfunnels.com/cdn-cgi/image/width=1000px,fit=scale-down,f=auto,q=70/https://statics.myclickfunnels.com/workspace/JZYVrZ/image/19418102/file/fc00db42cd71a4a2d6da13f0aba6359d.png" alt="Secure Checkout">
+  </div>
+
+  <!-- Footer -->
+  <div class="page-footer">
+    All rights reserved. TOS apply.<br>
+    <a href="#">Privacy Policy</a> | <a href="#">Terms and Conditions.</a><br>
+    For help: support@davinci.com
+  </div>
+
+</div>
+
+<!-- Exit Popup -->
+<div class="popup-overlay" id="popupOverlay">
+  <div class="popup">
+    <button class="popup-close" onclick="closePopup()">&times;</button>
+    <div class="popup-title">
+      <span class="red">WAIT!</span> In Just <b>1:45...</b>
+    </div>
+    <div class="popup-subtitle">
+      I'll Reveal My 7-Second Ear Trick That Silences Tinnitus Fast!
+    </div>
+    <div class="popup-content">
+      <img class="popup-img" src="https://images.clickfunnels.com/cdn-cgi/image/width=1000px,fit=scale-down,f=auto,q=50/https://statics.myclickfunnels.com/workspace/JZYVrZ/image/19418679/file/687464baa74f39b47aca7abf1a71422d.png" alt="Popup thumbnail">
+      <div class="popup-text">
+        It's a 7-second <span style="color:#000;font-weight:600">"ear trick"</span> you can do at home right now. It is absurdly simple and highly effective for silencing ear ringing. Try it tonight. <b>Believe me, you'll love this.</b>
+      </div>
+    </div>
+    <div class="popup-btn-wrap">
+      <a href="#" class="popup-btn" onclick="closePopup(); return false;">Keep Watching To See My 7-Second Ear Trick &gt;&gt;</a>
+    </div>
+  </div>
+</div>
+
+<script>
+// === VIEWER COUNT (purple badge) ===
+(function() {
+  var el = document.getElementById('viewerCount');
+  if (!el) return;
+  var MIN = 702, MAX = 880;
+  var viewers = Math.floor(720 + Math.random() * 120);
+  function clamp(n, lo, hi) { return Math.max(lo, Math.min(hi, n)); }
+  function tick() {
+    var delta = Math.floor(Math.random() * 7) - 3;
+    if (viewers < 730) delta += Math.floor(Math.random() * 3) + 1;
+    if (viewers > 860) delta -= Math.floor(Math.random() * 4) + 1;
+    viewers = clamp(viewers + delta, MIN, MAX);
+    el.textContent = viewers;
+    setTimeout(tick, 2000 + Math.random() * 2000);
+  }
+  el.textContent = viewers;
+  setTimeout(tick, 1200);
+})();
+
+// === PURCHASE COUNTER (yellow box) ===
+(function() {
+  var countEl = document.getElementById('purchaseCount');
+  var wrapperEl = document.getElementById('purchaseBox');
+  var minViewers = 9, maxViewers = 22;
+  var minChange = 1, maxChange = 4;
+  var FAST_COUNT = 5, FAST_MIN = 500, FAST_MAX = 1500;
+  var NORM_MIN = 3000, NORM_MAX = 7000;
+  var current = Math.floor(Math.random() * (maxViewers - minViewers + 1)) + minViewers;
+  var updates = 0;
+  countEl.textContent = current;
+
+  function update() {
+    var change = Math.floor(Math.random() * (maxChange - minChange + 1)) + minChange;
+    var op;
+    if (current + change > maxViewers) op = 'sub';
+    else if (current - change < minViewers) op = 'add';
+    else op = Math.random() < 0.5 ? 'add' : 'sub';
+    current = op === 'add' ? current + change : current - change;
+    countEl.textContent = current;
+    wrapperEl.classList.remove('shaking');
+    void wrapperEl.offsetWidth;
+    wrapperEl.classList.add('shaking');
+    updates++;
+    var delay = updates < FAST_COUNT
+      ? FAST_MIN + Math.random() * (FAST_MAX - FAST_MIN)
+      : NORM_MIN + Math.random() * (NORM_MAX - NORM_MIN);
+    setTimeout(update, delay);
+  }
+  setTimeout(update, 1500);
+})();
+
+// === EXIT POPUP ===
+var popupShown = false;
+document.addEventListener('mouseleave', function(e) {
+  if (e.clientY < 0 && !popupShown) {
+    document.getElementById('popupOverlay').classList.add('active');
+    popupShown = true;
+  }
+});
+
+function closePopup() {
+  document.getElementById('popupOverlay').classList.remove('active');
+}
+
+document.getElementById('popupOverlay').addEventListener('click', function(e) {
+  if (e.target === this) closePopup();
+});
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closePopup();
+});
+</script>
+
+</body>
+</html>
